@@ -1,25 +1,26 @@
 #include <iostream>
-#include "Arbol/ArbolBinario.h"
+#include "Arbol/ArbolBinarioAVL.h"
 using namespace std;
 
 void menu()
 {
     cout << "***MENU***" << endl;
-    cout << "1.Dar de alta" << endl;
-    cout << "2.Dar de baja" << endl;
+    cout << "1.Agregar Producto" << endl;
+    cout << "2.Eliminar Producto" << endl;
     cout << "3.Buscar" << endl;
     cout << "4.Mostrar arbol" << endl;
     cout << "5.Salir" << endl;
 }
 
-void altaUsuario(ArbolBinario<int> &a1)
+
+void altaUsuario(ArbolBinarioAVL<int> &a1)
 {
     int num;
     do
     {
         try
         {
-            cout << "Ingrese el numero del usuario" << endl;
+            cout << "Ingrese el numero del producto, para terminar presiones -1" << endl;
             cin >> num;
             if (num != -1)
             {
@@ -30,7 +31,7 @@ void altaUsuario(ArbolBinario<int> &a1)
         }
         catch (int e)
         {
-            if (e = 404)
+            if (e == 200)
             {
                 cout << "El elemento ya existe" << endl;
             }
@@ -39,62 +40,60 @@ void altaUsuario(ArbolBinario<int> &a1)
     } while (num != -1);
 }
 
-void bajaUsuario(ArbolBinario<int> &a1)
+void bajaUsuario(ArbolBinarioAVL<int> &a1)
 {
     int baja;
 
     try
     {
         cout << "Ingrese el numero para dar de baja" << endl;
-        cin>>baja;
+        cin >> baja;
         a1.remove(baja);
+        cout<<"Elemento eliminado"<<endl;
     }
     catch (int e)
     {
-        if (e==404)
+        if (e == 404)
         {
-            cout<<"No se pudo eliminar el usuario"<<endl;
+            cout << "No se pudo eliminar el usuario" << endl;
         }
-        
     }
 }
 
-void buscarUsuario(ArbolBinario<int> &a1){
+void buscarUsuario(ArbolBinarioAVL<int> &a1)
+{
 
     int usuarioBuscar;
 
     try
     {
-        cout<<"Ingrese el elemento que desea buscar"<<endl;
-        cin>>usuarioBuscar;
+        cout << "Ingrese el elemento que desea buscar" << endl;
+        cin >> usuarioBuscar;
         a1.search(usuarioBuscar);
-        cout<<"Usuario encontrado"<<endl;
+        cout << "Elemento encontrado" << endl;
     }
-    catch(int e)
+    catch (int e)
     {
-        if (e==404)
+        if (e == 404)
         {
-            cout<<"Usuario no encontrado"<<endl;
+            cout << "Usuario no encontrado" << endl;
         }
-        
     }
-    
-
 }
 
-int main()
+int main ()
 {
 
-    cout << "Ejercicio N° 3" << endl;
+    cout << "Ejercicio 1" << endl;
 
-    ArbolBinario<int> arbol;
+    ArbolBinarioAVL<int> arbol;
     int option;
 
     do
     {
         menu();
-        cout<<"Ingrese una opcion"<<endl;
-        cin>>option;
+        cout << "Ingrese una opcion" << endl;
+        cin >> option;
 
         switch (option)
         {
@@ -109,9 +108,9 @@ int main()
             break;
         case 4:
             arbol.print();
-            break;  
+            break;
         default:
-            cout<<"Opcion Incorrecta..."<<endl;
+            cout << "Saliendo..." << endl;
             break;
         }
     } while (option != 5);
